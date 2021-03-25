@@ -59,18 +59,25 @@
     <CDropdownItem>
       <CIcon name="cil-shield-alt" /> Lock Account
     </CDropdownItem>
-    <CDropdownItem>
-      <CIcon name="cil-lock-locked" /> Logout
+    <CDropdownItem @click="logout">
+      <CIcon name="cil-lock-locked"/> Logout
     </CDropdownItem>
   </CDropdown>
 </template>
 
 <script>
+import { AuthService } from '../services/auth.service'
+
 export default {
-  name: 'TheHeaderDropdownAccnt',
+  name: 'HeaderDropdownAccnt',
   data () {
     return { 
       itemsCount: 42
+    }
+  },
+  methods: {
+    logout() {
+      AuthService.logout()
     }
   }
 }

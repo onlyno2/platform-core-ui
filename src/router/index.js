@@ -2,7 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 
 // Containers
-const TheContainer = () => import('@/containers/TheContainer')
+const Layout = () => import('@/layout/Layout')
 
 // Views
 const Dashboard = () => import('@/views/Dashboard')
@@ -50,16 +50,17 @@ const Modals = () => import('@/views/notifications/Modals')
 // Views - Pages
 const Page404 = () => import('@/views/pages/Page404')
 const Page500 = () => import('@/views/pages/Page500')
-const Login = () => import('@/views/pages/Login')
+const Login = () => import('@/pages/Login')
 const Register = () => import('@/views/pages/Register')
 
 // Users
 const Users = () => import('@/views/users/Users')
 const User = () => import('@/views/users/User')
 
+import AuthRoutes from './AuthRoutes'
 Vue.use(Router)
 
-export default new Router({
+let router = new Router({
   mode: 'hash', // https://router.vuejs.org/api/#mode
   linkActiveClass: 'active',
   scrollBehavior: () => ({ y: 0 }),
@@ -68,11 +69,12 @@ export default new Router({
 
 function configRoutes () {
   return [
+    ...AuthRoutes,
     {
       path: '/',
       redirect: '/dashboard',
       name: 'Home',
-      component: TheContainer,
+      component: Layout,
       children: [
         {
           path: 'dashboard',
@@ -102,7 +104,10 @@ function configRoutes () {
         {
           path: 'charts',
           name: 'Charts',
-          component: Charts
+          component: Charts,
+          meta: {
+            requiresAuth: true
+          }
         },
         {
           path: 'widgets',
@@ -340,3 +345,19 @@ function configRoutes () {
   ]
 }
 
+router.beforeEach((to, from, next) => {
+  if(to.matched.some(record => record.meta.requiresAuth)) {
+    if(localStorage.getItem('auth-token') === null) {
+      next({
+        path: '/login',
+        params: { nextUrl: to.fullPath }
+      })
+    } else {
+      next()
+    }
+  } else {
+    next()
+  }
+})
+
+export default router
