@@ -1,5 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+
+import modules from './stores'
 Vue.use(Vuex)
 
 const state = {
@@ -23,5 +25,6 @@ const mutations = {
 
 export default new Vuex.Store({
   state,
-  mutations
+  mutations,
+  modules: { ...modules }
 })

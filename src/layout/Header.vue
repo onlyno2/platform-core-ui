@@ -20,8 +20,8 @@
         </CHeaderNavLink>
       </CHeaderNavItem>
       <CHeaderNavItem class="px-3">
-        <CHeaderNavLink to="/users" exact>
-          Users
+        <CHeaderNavLink>
+          <ProjectList />
         </CHeaderNavLink>
       </CHeaderNavItem>
       <CHeaderNavItem class="px-3">
@@ -46,7 +46,7 @@
           <CIcon name="cil-envelope-open"/>
         </CHeaderNavLink>
       </CHeaderNavItem>
-      <TheHeaderDropdownAccnt/>
+      <HeaderDropdownAccnt/>
     </CHeaderNav>
     <CSubheader class="px-3">
       <CBreadcrumbRouter class="border-0 mb-0"/>
@@ -55,12 +55,14 @@
 </template>
 
 <script>
-import TheHeaderDropdownAccnt from './TheHeaderDropdownAccnt'
+import HeaderDropdownAccnt from './HeaderDropdownAccnt'
+import ProjectList from '../components/Project/ProjectList'
 
 export default {
-  name: 'TheHeader',
+  name: 'Header',
   components: {
-    TheHeaderDropdownAccnt
+    HeaderDropdownAccnt,
+    ProjectList
   }
 }
 </script>
