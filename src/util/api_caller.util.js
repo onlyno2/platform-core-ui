@@ -40,12 +40,23 @@ api_v1.interceptors.response.use(function (response) {
   return response;
 }, function (error) {
   let error_message = ''
-  if(error.response.status === 401) {
-    localStorage.removeItem('auth-token')
-    error_message = error.response.data.error
-    Router.push('/login')
+
+  switch (error.response.status) {
+    case 401:
+      localStorage.removeItem('auth-token')
+      error_message = error.response.data.error
+      Router.push('/login')
+      break
+  
+    case 404: case 400: case 422:
+      error_message = error.response.data.status
+      break
+
+    case 500:
+      break
   }
-  Vue.$toast.error(error_message)
+  if (error_message !== '')
+    Vue.$toast.error(error_message)
   return Promise.reject(error)
 })
 

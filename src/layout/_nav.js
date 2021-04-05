@@ -4,6 +4,18 @@ export default [
     _children: [
       {
         _name: 'CSidebarNavItem',
+        name: 'Projects',
+        to: '/projects',
+        icon: 'cib-graphcool'
+      },
+      {
+        _name: 'CSidebarNavItem',
+        name: 'Device Types',
+        to: '/device_types',
+        icon: 'cil-memory'
+      },
+      {
+        _name: 'CSidebarNavItem',
         name: 'Dashboard',
         to: '/dashboard',
         icon: 'cil-speedometer',
