@@ -4,10 +4,11 @@
     class="c-header-nav-items"
     placement="bottom"
     add-menu-classes="pt-0"
+    v-if="current_project"
   >
     <template #toggler>
       <CHeaderNavLink>
-        Project: {{ current_project ? current_project.attributes.slug : 'Not selected' }}
+        Project: {{ current_project.attributes.slug }}
       </CHeaderNavLink>
     </template>
     <div v-for="(item, index) in projects" v-bind:key="index">
@@ -15,7 +16,7 @@
         {{ item.attributes.name }}
       </CDropdownItem>
     </div>
-    <CPagination :activePage.sync="paginate.current_page" :pages="Math.round(paginate.total / paginate.items)" @change="update_page(page)"/>
+    <CPagination :activePage.sync="paginate.current_page" :pages="paginate.pages"/>
   </CDropdown>
 </template>
 
@@ -37,7 +38,8 @@ export default {
   },
   watch: {
     'paginate.current_page': function(newPage) {
-      this.$store.dispatch('projectModule/get_list', newPage)
+      if (newPage <= this.paginate.pages)
+        this.$store.dispatch('projectModule/get_list', newPage)
     }
   },
   methods: {
@@ -46,15 +48,16 @@ export default {
     },
     set_current(project) {
       this.$store.dispatch('projectModule/set_current', project)
-    },
-    update_page(page) {
-      console.log(page)
     }
   },
-  beforeMount() {
+  created() {
     this.$store.dispatch('projectModule/get_list')
-    if(this.current_project && Object.keys(this.current_project).length === 0)
+    if(localStorage.getItem('cprj') === 'undefined') {
       this.$store.dispatch('projectModule/set_current', this.projects[0])
+    } else {
+      let current_project = JSON.parse(localStorage.getItem('cprj'))
+      this.$store.dispatch('projectModule/set_current', current_project)
+    }
   }
 }
 </script>

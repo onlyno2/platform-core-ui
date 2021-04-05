@@ -58,6 +58,9 @@ const Users = () => import('@/views/users/Users')
 const User = () => import('@/views/users/User')
 
 import AuthRoutes from './AuthRoutes'
+import ProjectRoutes from './ProjectRoutes'
+import DeviceTypeRoutes from './DeviceTypeRoutes'
+
 Vue.use(Router)
 
 let router = new Router({
@@ -76,6 +79,8 @@ function configRoutes () {
       name: 'Home',
       component: Layout,
       children: [
+        ...DeviceTypeRoutes,
+        ...ProjectRoutes,
         {
           path: 'dashboard',
           name: 'Dashboard',
