@@ -26,10 +26,10 @@ jobs:
         node-version: ${{ matrix.node-version }}
     - name: project check
       run: |
-        npm i
-        npm run clearCache
-        npm run build
-        npm run lint
+        yarn install
+        yarn clearCache
+        yarn build
+        yarn lint
         # Add test later on
         # npm run test:unit
       env:
