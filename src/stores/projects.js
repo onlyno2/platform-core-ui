@@ -32,8 +32,12 @@ const actions = {
     const response = await ProjectService.index(page)
     if(response.status === 200) {
       commit('UPDATE_PROJECT_LIST', response.data.data)
-      if (localStorage.getItem('cprj') !== undefined)
+      const cprj = JSON.parse(localStorage.getItem('cprj'))
+      if (cprj) {
+        commit('SET_CURRENT', cprj)
+      } else {
         commit('SET_CURRENT', response.data.data[0])
+      }
       commit('UPDATE_PAGINATE_INFO', response.data.paginate)
     }
   },
@@ -41,9 +45,9 @@ const actions = {
     commit('SET_CURRENT', project)
     localStorage.setItem('cprj', JSON.stringify(project))
   },
-  create: async({ dispatch }, data) => {
+  create: async({ dispatch, state }, data) => {
     const response = await ProjectService.create(data)
-    if (response.status === 200) {
+    if (response.status === 201) {
       dispatch('get_list', state.pagination.current_page)
     }
   },
@@ -59,7 +63,7 @@ const actions = {
       commit('UPDATE_CURRENT_SETTING_OBJECT', response.data.data)
     }
   },
-  update: async({ state }) => {
+  update: async({ state, dispatch }) => {
     const { id, attributes } = state.setting_object
     const response = await ProjectService.update(id, attributes)
     if (response.status === 200) {

@@ -6,7 +6,7 @@
           <CCardHeader>
             <CRow align-horizontal="end">
               <CCol>
-                <h3> Project Detail </h3>
+                <h3> Device Type Detail </h3>
               </CCol>
               <CCol style="text-align: end">
                 <CButton
@@ -14,7 +14,7 @@
                   variant="outline"
                   square
                   size="md"
-                  @click="delete_project(item)"
+                  @click="edit(item)"
                 >
                   Edit
                 </CButton>
@@ -53,7 +53,9 @@ export default {
     })
   },
   methods: {
-
+    edit() {
+      this.$router.push(`/projects/${this.project.attributes.name}/edit`)
+    }
   },
   beforeMount() {
     this.$store.dispatch('projectModule/show', this.$route.params.id)
