@@ -21,6 +21,7 @@
 </template>
 
 <script>
+import { AuthService } from '../../services/auth.service'
 import { mapState } from 'vuex'
 
 export default {

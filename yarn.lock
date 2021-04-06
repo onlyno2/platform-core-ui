@@ -11052,6 +11052,18 @@ vue-jest@^3.0.5:
     tsconfig "^7.0.0"
     vue-template-es2015-compiler "^1.6.0"
 
+vue-json-editor@^1.4.3:
+  version "1.4.3"
+  resolved "https://registry.yarnpkg.com/vue-json-editor/-/vue-json-editor-1.4.3.tgz#004c9037ac91f16dd8fc558c9914e5f33a41d71c"
+  integrity sha512-st9HdXBgCnyEmmfWrZQiKzp4KuYXzmYVUNDn5h6Fa18MrrGS1amnyUFyv7hQFsNBDW27B7BKkdGOqszYT1srAg==
+  dependencies:
+    vue "^2.2.6"
+
+vue-json-pretty@^1.7.1:
+  version "1.7.1"
+  resolved "https://registry.yarnpkg.com/vue-json-pretty/-/vue-json-pretty-1.7.1.tgz#c7cd0ef9e85d89025a8bf87a0da14b0fc7d19913"
+  integrity sha512-D7aHQ5XPooSAEndTkb/RvXXJdmuCjaj14IMRdJwO4q+yJMpzPv87FT2gz4Dt2mCr1EzFyat7z7Qv9R+l/1as+w==
+
 "vue-loader-v16@npm:vue-loader@^16.1.0":
   version "16.1.2"
   resolved "https://registry.yarnpkg.com/vue-loader/-/vue-loader-16.1.2.tgz#5c03b6c50d2a5f983c7ceba15c50d78ca2b298f4"
@@ -11108,7 +11120,7 @@ vue-toast-notification@^0.6.1:
   resolved "https://registry.yarnpkg.com/vue-toast-notification/-/vue-toast-notification-0.6.1.tgz#0ee0d75cba500a342f720107fc4d09cfaa84aa31"
   integrity sha512-RahxClHqgCW8Ch1Gt2es1veeDuNBP9UFfvIUqO1VzTWrURqEE4mZvQ4+KcowcwwYk7lVX493d/+lrbCBf7mxCw==
 
-vue@^2.6.12, vue@~2.6.11, vue@~2.6.12:
+vue@^2.2.6, vue@^2.6.12, vue@~2.6.11, vue@~2.6.12:
   version "2.6.12"
   resolved "https://registry.yarnpkg.com/vue/-/vue-2.6.12.tgz#f5ebd4fa6bd2869403e29a896aed4904456c9123"
   integrity sha512-uhmLFETqPPNyuLLbsKz6ioJ4q7AZHzD8ZVFNATNyICSZouqP2Sz0rotWQC8UNBF6VGSCs5abnKJoStA6JbCbfg==
