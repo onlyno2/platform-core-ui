@@ -6,15 +6,15 @@
           <CCardHeader>
             <CRow align-horizontal="end">
               <CCol>
-                <h3>Project Edit</h3>
+                <h3>Tạo mới dự án</h3>
               </CCol>
             </CRow>
           </CCardHeader>
           <CCardBody>
             <CForm>
-              <CInput label="Name" v-model="project.name" />
+              <CInput label="Tên" v-model="project.name" />
               <CTextarea
-                label="Description"
+                label="Mô tả"
                 v-model="project.description"
               />
             </CForm>
@@ -27,7 +27,7 @@
                 square
                 @click="create"
               >
-                Create
+                Tạo mới
               </CButton>
             </CRow>
           </CCardFooter>

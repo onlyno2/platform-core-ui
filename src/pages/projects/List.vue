@@ -4,7 +4,7 @@
       <CCardHeader>
         <CRow align-horizontal="end">
           <CCol md="6">
-            <h3>Project List</h3>
+            <h3>Danh sách dự án</h3>
           </CCol>
           <CCol md="6" class="text-right">
             <CButton
@@ -14,7 +14,7 @@
               md
               @click="create_project(item)"
             >
-              <CIcon class="create-btn-icon" name="cil-plus" /> Create
+              <CIcon class="create-btn-icon" name="cil-plus" /> Tạo mới
             </CButton>
           </CCol>
         </CRow>
@@ -22,7 +22,7 @@
       <CCardBody>
         <CDataTable :items="projects" :fields="fields" hover border>
           <template #id="{item}">
-            <td>
+            <td @click="show_project(item)">
               {{ item.attributes.slug }}
             </td>
           </template>
@@ -35,22 +35,13 @@
             <td class="py-2">
               <CButtonGroup>
                 <CButton
-                  color="primary"
-                  variant="outline"
-                  square
-                  size="sm"
-                  @click="show_project(item)"
-                >
-                  Show
-                </CButton>
-                <CButton
                   color="info"
                   variant="outline"
                   square
                   size="sm"
                   @click="edit_project(item)"
                 >
-                  Edit
+                  Sửa
                 </CButton>
                 <CButton
                   color="danger"
@@ -59,7 +50,7 @@
                   size="sm"
                   @click="delete_project(item)"
                 >
-                  Delete
+                  Xóa
                 </CButton>
               </CButtonGroup>
             </td>
@@ -85,7 +76,8 @@ export default {
           key: 'id'
         },
         {
-          key: 'description'
+          key: 'description',
+          label: 'Mô tả'
         },
         {
           key: 'actions',
@@ -115,8 +107,8 @@ export default {
       this.$router.push(`/projects/${item.attributes.slug}/edit`)
     }
   },
-  beforeMount() {
-    this.$store.dispatch('projectModule/get_list')
+  async beforeMount() {
+    await this.$store.dispatch('projectModule/index')
   }
 }
 </script>

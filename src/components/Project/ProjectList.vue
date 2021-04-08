@@ -40,7 +40,7 @@ export default {
   watch: {
     'paginate.current_page': function(newPage) {
       if (newPage <= this.paginate.pages)
-        this.$store.dispatch('projectModule/get_list', newPage)
+        this.$store.dispatch('projectModule/index', newPage)
     }
   },
   methods: {
@@ -51,8 +51,8 @@ export default {
       this.$store.dispatch('projectModule/set_current', project)
     }
   },
-  created() {
-    this.$store.dispatch('projectModule/get_list')
+  async beforeMount() {
+    await this.$store.dispatch('projectModule/index')
     if(localStorage.getItem('cprj') === 'undefined') {
       this.$store.dispatch('projectModule/set_current', this.projects[0])
     } else {
