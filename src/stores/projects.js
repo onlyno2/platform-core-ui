@@ -28,7 +28,7 @@ const mutations = {
 }
 
 const actions = {
-  get_list: async({ commit }, page = 1) => {
+  index: async({ commit }, page = 1) => {
     const response = await ProjectService.index(page)
     if(response.status === 200) {
       commit('UPDATE_PROJECT_LIST', response.data.data)
@@ -48,13 +48,13 @@ const actions = {
   create: async({ dispatch, state }, data) => {
     const response = await ProjectService.create(data)
     if (response.status === 201) {
-      dispatch('get_list', state.pagination.current_page)
+      dispatch('index', state.pagination.current_page)
     }
   },
   delete: async({ dispatch, state }, project) => {
     const response = await ProjectService.delete(project.attributes.slug)
     if (response.status === 200) {
-      dispatch('get_list', state.pagination.current_page)
+      dispatch('index', state.pagination.current_page)
     }
   },
   show: async({ commit }, id) => {

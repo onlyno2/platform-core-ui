@@ -6,7 +6,7 @@ const Create = () => import('@/pages/device_types/Create')
 export default [
   {
     path: '/device_types',
-    name: 'DeviceTypeList',
+    name: 'Danh sách loại thiết bị',
     component: List,
     meta: {
       requiresAuth: true
@@ -14,7 +14,7 @@ export default [
   },
   {
     path: '/device_types/create',
-    name: 'DeviceTypeCreate',
+    name: 'Tạo mới loại thiết bị',
     component: Create,
     meta: {
       requiresAuth: true
@@ -22,7 +22,7 @@ export default [
   },
   {
     path: '/device_types/:id/show',
-    name: 'DeviceTypeShow',
+    name: 'Chi tiết loại thiết bị',
     component: Show,
     meta: {
       requiresAuth: true
@@ -30,7 +30,7 @@ export default [
   },
   {
     path: '/device_types/:id/edit',
-    name: 'DeviceTypeEdit',
+    name: 'Cập nhật loại thiết bị',
     component: Edit,
     meta: {
       requiresAuth: true

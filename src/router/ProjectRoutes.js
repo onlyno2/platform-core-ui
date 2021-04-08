@@ -6,7 +6,7 @@ const Create = () => import('@/pages/projects/Create')
 export default [
   {
     path: '/projects',
-    name: 'ProjectList',
+    name: 'Danh sách dự án',
     component: List,
     meta: {
       requiresAuth: true
@@ -14,7 +14,7 @@ export default [
   },
   {
     path: '/projects/:id/show',
-    name: 'ProjectShow',
+    name: 'Chi tiết dự án',
     component: Show,
     meta: {
       requiresAuth: true
@@ -22,7 +22,7 @@ export default [
   },
   {
     path: '/projects/:id/edit',
-    name: 'ProjectEdit',
+    name: 'Cập nhật dự án',
     component: Edit,
     meta: {
       requiresAuth: true
@@ -30,7 +30,7 @@ export default [
   },
   {
     path: '/projects/create',
-    name: 'ProjectCreate',
+    name: 'Tạo mới dự án',
     component: Create,
     meta: {
       requiresAuth: true

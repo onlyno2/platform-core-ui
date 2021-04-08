@@ -3,7 +3,7 @@ const Login = () => import('@/pages/Login')
 export default [
   {
     path: '/login',
-    name: 'Login',
+    name: 'Đăng nhập',
     component: Login
   }
 ]

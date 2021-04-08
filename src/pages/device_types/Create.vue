@@ -6,18 +6,18 @@
           <CCardHeader>
             <CRow align-horizontal="end">
               <CCol>
-                <h3> Device Type Create </h3>
+                <h3> Tạo loại thiết bị </h3>
               </CCol>
             </CRow>
           </CCardHeader>
           <CCardBody>
             <CTabs variant="pills" :active-tab="active_tab">
-              <CTab title="Basic Info">
+              <CTab title="Thông tin cơ bản">
                 <CCard>
                   <CCardBody>
                     <CForm>
-                      <CInput label="name" v-model="device_type.attributes.name" />
-                      <CTextarea label="description" v-model="device_type.attributes.description" />
+                      <CInput label="Tên" v-model="device_type.attributes.name" />
+                      <CTextarea label="Mô tả" v-model="device_type.attributes.description" />
                     </CForm>
                   </CCardBody>
                 </CCard>
@@ -31,7 +31,7 @@
                   </CCardBody>
                 </CCard>
               </CTab>
-              <CTab title="Device Type Info">
+              <CTab title="Thông tin thiết bị">
                 <CCard>
                   <CCardBody>
                     <CForm>
@@ -50,7 +50,7 @@
                 square
                 @click="create"
               >
-                Create
+                Tạo
               </CButton>
             </CRow>
           </CCardFooter>

@@ -6,7 +6,7 @@
           <CCardHeader>
             <CRow align-horizontal="end">
               <CCol>
-                <h3> Device Type Detail </h3>
+                <h3> Chi tiết loại thiết bị </h3>
               </CCol>
               <CCol style="text-align: end">
                 <CButton
@@ -15,19 +15,19 @@
                   square
                   @click="edit"
                 >
-                  Edit
+                  Cập nhật
                 </CButton>
               </CCol>
             </CRow>
           </CCardHeader>
           <CCardBody>
             <CTabs variant="pills" :active-tab="active_tab">
-              <CTab title="Basic Info">
+              <CTab title="Thông tin cơ bản">
                 <CCard>
                   <CCardBody>
                     <CForm>
-                      <CInput label="name" v-model="device_type.attributes.name" :disabled="true"/>
-                      <CTextarea label="description" v-model="device_type.attributes.description" :disabled="true"/>
+                      <CInput label="Tên" v-model="device_type.attributes.name" :disabled="true"/>
+                      <CTextarea label="Mô tả" v-model="device_type.attributes.description" :disabled="true"/>
                     </CForm>
                   </CCardBody>
                 </CCard>
@@ -41,7 +41,7 @@
                   </CCardBody>
                 </CCard>
               </CTab>
-              <CTab title="Device Type Info">
+              <CTab title="Thông tin thiết bị">
                 <CCard>
                   <CCardBody>
                     <CForm>

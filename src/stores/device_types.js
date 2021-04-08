@@ -26,7 +26,7 @@ const mutations = {
 }
 
 const actions = {
-  get_list: async({ commit }, page = 1) => {
+  index: async({ commit }, page = 1) => {
     let current_project = JSON.parse(localStorage.getItem('cprj'))
     const response = await DeviceTypeService.index(current_project.attributes.slug, page)
     if(response.status === 200) {
@@ -49,7 +49,7 @@ const actions = {
     const data = state.setting_object.attributes
     const response = await DeviceTypeService.update(current_project.attributes.slug, id, data)
     if(response.status === 200) {
-      Vue.$toast.success('Update success')
+      Vue.$toast.success('Cập nhật thành công')
       commit('UPDATE_CURRENT_SETTING_OBJECT', response.data.data)
     }
   },
@@ -57,8 +57,8 @@ const actions = {
     let current_project = JSON.parse(localStorage.getItem('cprj'))
     const response = await DeviceTypeService.create(current_project.attributes.slug, data)
     if(response.status === 201) {
-      Vue.$toast.success('Create success')
-      dispatch('get_list', state.pagination.current_page)
+      Vue.$toast.success('Tạo mới thành công')
+      dispatch('index', state.pagination.current_page)
       router.push('/device_types')
     }
   },
@@ -67,8 +67,8 @@ const actions = {
     const id = item.attributes.name
     const response = await DeviceTypeService.destroy(current_project.attributes.slug, id)
     if(response.status === 200) {
-      Vue.$toast.success('Delete success')
-      dispatch('get_list', state.pagination.current_page)
+      Vue.$toast.success('Xóa thành công')
+      dispatch('index', state.pagination.current_page)
     }
   }
 }

@@ -60,6 +60,7 @@ const User = () => import('@/views/users/User')
 import AuthRoutes from './AuthRoutes'
 import ProjectRoutes from './ProjectRoutes'
 import DeviceTypeRoutes from './DeviceTypeRoutes'
+import DeviceRoutes from './DeviceRoutes'
 
 Vue.use(Router)
 
@@ -81,6 +82,7 @@ function configRoutes () {
       children: [
         ...DeviceTypeRoutes,
         ...ProjectRoutes,
+        ...DeviceRoutes,
         {
           path: 'dashboard',
           name: 'Dashboard',

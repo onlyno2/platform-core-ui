@@ -4,7 +4,7 @@
       <CCardHeader>
         <CRow align-horizontal="end">
           <CCol md="6">
-            <h3>Danh sách loại thiết bị</h3>
+            <h3>Danh sách thiết bị</h3>
           </CCol>
           <CCol md="6" class="text-right">
             <CButton
@@ -14,13 +14,18 @@
               md
               @click="create(item)"
             >
-              <CIcon class="create-btn-icon" name="cil-plus" /> Tạo
+              <CIcon class="create-btn-icon" name="cil-plus" /> Create
             </CButton>
+          </CCol>
+        </CRow>
+        <CRow>
+          <CCol md="6" class="mt-3">
+            <CSelect label="Loại thiết bị" :options="type_options" :value="current_type" @update:value="type_selected"> </CSelect>
           </CCol>
         </CRow>
       </CCardHeader>
       <CCardBody>
-        <CDataTable :items="device_types" :fields="fields" hover border>
+        <CDataTable :items="devices" :fields="fields" hover border>
           <template #name="{item}">
             <td @click="show(item)">
               {{ item.attributes.name }}
@@ -31,6 +36,17 @@
               {{ item.attributes.description }}
             </td>
           </template>
+          <template #active="{item}">
+            <td>
+              <CBadge color="success" v-if="item.attributes.active">Đang kết nối</CBadge>
+              <CBadge color="danger" v-if="!item.attributes.active">Đã ngắt</CBadge>
+            </td>
+          </template>
+          <template #last_active="{item}">
+            <td>
+              {{ item.attributes.last_active }}
+            </td>
+          </template>
           <template #actions="{item}">
             <td class="py-2">
               <CButtonGroup>
@@ -39,7 +55,7 @@
                   variant="outline"
                   square
                   size="sm"
-                  @click="edit(item)"
+                  @click="update(item)"
                 >
                   Sửa
                 </CButton>
@@ -66,7 +82,7 @@
 import { mapState } from 'vuex'
 
 export default {
-  name: 'DeviceTypeList',
+  name: 'DeviceList',
   components: {
   },
   data () {
@@ -84,6 +100,14 @@ export default {
           label: 'Mô tả'
         },
         {
+          key: 'active',
+          label: 'Kết nối'
+        },
+        {
+          key: 'last_active',
+          label: 'Hoạt động lần cuối'
+        },
+        {
           key: 'actions',
           label: '',
           _style: 'width:1%'
@@ -91,28 +115,52 @@ export default {
       ]
     }
   },
+  watch: {
+    'paginate.current_page': function(newPage) {
+      if (newPage <= this.paginate.pages)
+        this.$store.dispatch('deviceModule/index', newPage)
+    }
+  },
   computed: {
     ...mapState({
       device_types: state => state.deviceTypeModule.device_types,
-      paginate: state => state.deviceTypeModule.pagination
+      devices: state => state.deviceModule.devices,
+      paginate: state => state.deviceModule.pagination,
+      type_options: (state) => {
+        return state.deviceTypeModule.device_types.map(function(device_type) {
+          return {
+            value: device_type.attributes.name,
+            label: device_type.attributes.name
+          }
+        })
+      },
+      current_type: state => state.deviceModule.current_type
     })
   },
   methods: {
     show(item) {
-      this.$router.push(`device_types/${item.attributes.name}/show`)
+      this.$router.push(`devices/${item.attributes.name}/show`)
     },
     create() {
-      this.$router.push(`device_types/create`)
+      this.$router.push(`devices/create`)
     },
     update(item) {
-      this.$router.push(`device_types/${item.attributes.name}/edit`)
+      this.$router.push(`devices/${item.attributes.name}/edit`)
     },
     destroy(item) {
-      this.$store.dispatch('deviceTypeModule/destroy', item)
+      this.$store.dispatch('deviceModule/destroy', item.attributes.name)
+    },
+    type_selected(value) {
+      this.$store.dispatch('deviceModule/set_type', value)
+      this.$store.dispatch('deviceModule/index')
     }
   },
   async beforeMount() {
     await this.$store.dispatch('deviceTypeModule/index')
+    if(this.current_type === '') {
+      this.$store.dispatch('deviceModule/set_type', this.device_types[0].attributes.name)
+    }
+    this.$store.dispatch('deviceModule/index')
   }
 }
 </script>

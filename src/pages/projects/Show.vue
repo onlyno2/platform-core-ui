@@ -6,7 +6,7 @@
           <CCardHeader>
             <CRow align-horizontal="end">
               <CCol>
-                <h3> Device Type Detail </h3>
+                <h3> Chi tiết dự án </h3>
               </CCol>
               <CCol style="text-align: end">
                 <CButton
@@ -16,17 +16,17 @@
                   size="md"
                   @click="edit(item)"
                 >
-                  Edit
+                  Sửa
                 </CButton>
               </CCol>
             </CRow>
           </CCardHeader>
           <CCardBody>
             <CForm>
-              <CInput label="Name" :disabled="true" v-model="project.attributes.name" />
-              <CTextarea label="Description" :disabled="true" v-model="project.attributes.description" />
-              <CInput label="Slug" :disabled="true" v-model="project.attributes.slug" />
-              <CInput label="Created At" :disabled="true" v-model="project.attributes.created_at" />
+              <CInput label="Tên" :disabled="true" v-model="project.attributes.name" />
+              <CTextarea label="Mô tả" :disabled="true" v-model="project.attributes.description" />
+              <CInput label="Id" :disabled="true" v-model="project.attributes.slug" />
+              <CInput label="Khởi tạo lúc" :disabled="true" v-model="project.attributes.created_at" />
             </CForm>
           </CCardBody>
         </CCard>

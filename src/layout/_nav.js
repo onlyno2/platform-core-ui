@@ -16,6 +16,12 @@ export default [
       },
       {
         _name: 'CSidebarNavItem',
+        name: 'Devices',
+        to: '/devices',
+        icon: 'cil-memory'
+      },
+      {
+        _name: 'CSidebarNavItem',
         name: 'Dashboard',
         to: '/dashboard',
         icon: 'cil-speedometer',
