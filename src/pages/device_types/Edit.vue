@@ -65,7 +65,6 @@ import vueJsonEditor from 'vue-json-editor'
 import { mapState } from 'vuex'
 
 export default {
-  name: 'ProjectShow',
   data() {
     return {
       active_tab: 0

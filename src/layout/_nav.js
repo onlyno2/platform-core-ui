@@ -4,21 +4,27 @@ export default [
     _children: [
       {
         _name: 'CSidebarNavItem',
-        name: 'Projects',
+        name: 'Dự án',
         to: '/projects',
         icon: 'cib-graphcool'
       },
       {
         _name: 'CSidebarNavItem',
-        name: 'Device Types',
+        name: 'Loại thiết bị',
         to: '/device_types',
         icon: 'cil-memory'
       },
       {
         _name: 'CSidebarNavItem',
-        name: 'Devices',
+        name: 'Thiết bị ',
         to: '/devices',
         icon: 'cil-memory'
+      },
+      {
+        _name: 'CSidebarNavItem',
+        name: 'Ứng dụng',
+        to: '/apps',
+        icon: 'cil-applications'
       },
       {
         _name: 'CSidebarNavItem',

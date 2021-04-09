@@ -1,36 +1,41 @@
 import Vue from 'vue';
 import router from '../router/index'
 
-import { DeviceTypeService } from '../services/device_type.service'
+import { AppService } from '../services/app.service'
 
 const state = {
-  device_types: [],
+  apps: [],
   pagination: {},
   setting_object: {},
+  created_object: {}
 }
 
 const getters = {
-  device_types: (state) => state.device_types,
+  apps: (state) => state.apps,
 }
 
 const mutations = {
-  UPDATE_DEVICE_TYPE_LIST: (state, device_types) => {
-    state.device_types = device_types;
+  UPDATE_APP_LIST: (state, apps) => {
+    state.apps = apps;
   },
   UPDATE_PAGINATE_INFO: (state, paginate) => {
     state.pagination = paginate
   },
-  UPDATE_CURRENT_SETTING_OBJECT: (state, device_type) => {
-    state.setting_object = device_type
+  UPDATE_CURRENT_SETTING_OBJECT: (state, app) => {
+    state.setting_object = app
+  },
+  SET_CREATED_OBJECT: (state, created_object) => {
+    state.created_object = created_object
   }
 }
 
 const actions = {
   index: async({ commit }, page = 1) => {
     let current_project = JSON.parse(localStorage.getItem('cprj'))
-    const response = await DeviceTypeService.index(current_project.attributes.slug, page)
+    const response = await AppService.index(current_project.attributes.slug, page)
     if(response.status === 200) {
-      commit('UPDATE_DEVICE_TYPE_LIST', response.data.data)
+      console.log(response.data)
+      commit('UPDATE_APP_LIST', response.data.data)
       commit('UPDATE_PAGINATE_INFO', response.data.paginate)
     }
   },
@@ -39,7 +44,7 @@ const actions = {
   },
   show: async({ commit }, id) => {
     let current_project = JSON.parse(localStorage.getItem('cprj'))
-    const response = await DeviceTypeService.show(current_project.attributes.slug, id)
+    const response = await AppService.show(current_project.attributes.slug, id)
     if(response.status === 200) {
       commit('UPDATE_CURRENT_SETTING_OBJECT', response.data.data)
     }
@@ -47,26 +52,26 @@ const actions = {
   update: async({ commit, state }, id) => {
     let current_project = JSON.parse(localStorage.getItem('cprj'))
     const data = state.setting_object.attributes
-    const response = await DeviceTypeService.update(current_project.attributes.slug, id, data)
+    const response = await AppService.update(current_project.attributes.slug, id, data)
     if(response.status === 200) {
       Vue.$toast.success('Cập nhật thành công')
       commit('UPDATE_CURRENT_SETTING_OBJECT', response.data.data)
-      router.push(`/device_types/${id}/show`)
+      router.push(`/apps/${id}/show`)
     }
   },
-  create: async({ dispatch, state }, data) => {
+  create: async({ commit, state }, data) => {
     let current_project = JSON.parse(localStorage.getItem('cprj'))
-    const response = await DeviceTypeService.create(current_project.attributes.slug, data)
+    const response = await AppService.create(current_project.attributes.slug, data)
     if(response.status === 201) {
       Vue.$toast.success('Tạo mới thành công')
-      dispatch('index', state.pagination.current_page)
-      router.push('/device_types')
+      commit('SET_CREATED_OBJECT', response.data.data)
+      console.log(state.created_object)
+      router.push('/apps/after_create')
     }
   },
-  destroy: async({ dispatch, state }, item) => {
+  destroy: async({ dispatch, state }, id) => {
     const current_project = JSON.parse(localStorage.getItem('cprj'))
-    const id = item.attributes.name
-    const response = await DeviceTypeService.destroy(current_project.attributes.slug, id)
+    const response = await AppService.destroy(current_project.attributes.slug, id)
     if(response.status === 200) {
       Vue.$toast.success('Xóa thành công')
       dispatch('index', state.pagination.current_page)

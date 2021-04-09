@@ -16,37 +16,12 @@
                 <CCard>
                   <CCardBody>
                     <CForm>
-                      <CSelect
-                        label="Loại thiết bị"
-                        :options="type_options"
-                        :value="current_type"
-                        :disabled="true"
-                      >
-                      </CSelect>
-                      <CInput label="Tên" v-model="device.attributes.name" :disabled="true"/>
+                      <CInput label="Tên" v-model="app.attributes.name" :disabled="true"/>
                       <CTextarea
                         label="Mô tả"
-                        v-model="device.attributes.description"
+                        v-model="app.attributes.description"
                         :disabled="true"
                       />
-                    </CForm>
-                  </CCardBody>
-                </CCard>
-              </CTab>
-              <CTab title="Metadata">
-                <CCard>
-                  <CCardBody>
-                    <CForm>
-                      <vue-json-pretty :data="device.attributes.device_info" :showLenght="true" > </vue-json-pretty>
-                    </CForm>
-                  </CCardBody>
-                </CCard>
-              </CTab>
-              <CTab title="Thông tin thiết bị">
-                <CCard>
-                  <CCardBody>
-                    <CForm>
-                      <vue-json-pretty :data="device.attributes.device_info" :showLenght="true" > </vue-json-pretty>
                     </CForm>
                   </CCardBody>
                 </CCard>
@@ -56,17 +31,17 @@
                   <CCardBody>
                     <CInput
                       label="Username"
-                      v-model="device.attributes.username"
+                      v-model="app.attributes.username"
                       :disabled="true"
                     />
                     <CInput
                       label="Clientid"
-                      v-model="device.attributes.client_id"
+                      v-model="app.attributes.client_id"
                       :disabled="true"
                     />
                     <CInput
                       label="Mật khẩu"
-                      v-model="device.attributes.secret_token"
+                      v-model="app.attributes.secret_token"
                       :disabled="true"
                     />
                     <CBadge color="danger">
@@ -100,23 +75,14 @@ export default {
   },
   computed: {
     ...mapState({
-      type_options: (state) => {
-        return state.deviceTypeModule.device_types.map(function (device_type) {
-          return {
-            value: device_type.attributes.name,
-            label: device_type.attributes.name,
-          };
-        });
-      },
-      device: state => state.deviceModule.created_object,
-      current_type: state => state.deviceModule.current_type
+      app: state => state.appModule.created_object
     })
   },
   methods: {
   },
   beforeMount() {
-    if(JSON.stringify(this.device) === JSON.stringify({})) {
-      this.$router.push('/devices')
+    if(JSON.stringify(this.app) === JSON.stringify({})) {
+      this.$router.push('/apps')
     }
   }
 }

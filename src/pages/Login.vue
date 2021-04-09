@@ -73,7 +73,6 @@ export default {
       }
     }
   },
-  name: 'Login',
   methods: {
     login() {
       AuthService.login(this.user)
