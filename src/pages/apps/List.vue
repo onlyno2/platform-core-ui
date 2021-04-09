@@ -4,7 +4,7 @@
       <CCardHeader>
         <CRow align-horizontal="end">
           <CCol md="6">
-            <h3>Danh sách thiết bị</h3>
+            <h3>Danh sách ứng dụng</h3>
           </CCol>
           <CCol md="6" class="text-right">
             <CButton
@@ -14,18 +14,18 @@
               md
               @click="create(item)"
             >
-              <CIcon class="create-btn-icon" name="cil-plus" /> Create
+              <CIcon class="create-btn-icon" name="cil-plus" /> Tạo mới
             </CButton>
-          </CCol>
-        </CRow>
-        <CRow>
-          <CCol md="6" class="mt-3">
-            <CSelect label="Loại thiết bị" :options="type_options" :value="current_type" @update:value="type_selected"> </CSelect>
           </CCol>
         </CRow>
       </CCardHeader>
       <CCardBody>
-        <CDataTable :items="devices" :fields="fields" hover border>
+        <CDataTable :items="apps" :fields="fields" hover border>
+          <template #id="{item}">
+            <td @click="show(item)">
+              {{ item.attributes.slug }}
+            </td>
+          </template>
           <template #name="{item}">
             <td @click="show(item)">
               {{ item.attributes.name }}
@@ -34,17 +34,6 @@
           <template #description="{item}">
             <td>
               {{ item.attributes.description }}
-            </td>
-          </template>
-          <template #active="{item}">
-            <td>
-              <CBadge color="success" v-if="item.attributes.active">Đang kết nối</CBadge>
-              <CBadge color="danger" v-if="!item.attributes.active">Đã ngắt</CBadge>
-            </td>
-          </template>
-          <template #last_active="{item}">
-            <td>
-              {{ item.attributes.last_active }}
             </td>
           </template>
           <template #actions="{item}">
@@ -99,14 +88,6 @@ export default {
           label: 'Mô tả'
         },
         {
-          key: 'active',
-          label: 'Kết nối'
-        },
-        {
-          key: 'last_active',
-          label: 'Hoạt động lần cuối'
-        },
-        {
           key: 'actions',
           label: '',
           _style: 'width:1%'
@@ -122,44 +103,26 @@ export default {
   },
   computed: {
     ...mapState({
-      device_types: state => state.deviceTypeModule.device_types,
-      devices: state => state.deviceModule.devices,
-      paginate: state => state.deviceModule.pagination,
-      type_options: (state) => {
-        return state.deviceTypeModule.device_types.map(function(device_type) {
-          return {
-            value: device_type.attributes.name,
-            label: device_type.attributes.name
-          }
-        })
-      },
-      current_type: state => state.deviceModule.current_type
+      apps: state => state.appModule.apps,
+      paginate: state => state.appModule.pagination
     })
   },
   methods: {
     show(item) {
-      this.$router.push(`devices/${item.attributes.name}/show`)
+      this.$router.push(`apps/${item.attributes.slug}/show`)
     },
     create() {
-      this.$router.push(`devices/create`)
+      this.$router.push(`apps/create`)
     },
     update(item) {
-      this.$router.push(`devices/${item.attributes.name}/edit`)
+      this.$router.push(`apps/${item.attributes.slug}/edit`)
     },
     destroy(item) {
-      this.$store.dispatch('deviceModule/destroy', item.attributes.name)
-    },
-    type_selected(value) {
-      this.$store.dispatch('deviceModule/set_type', value)
-      this.$store.dispatch('deviceModule/index')
+      this.$store.dispatch('appModule/destroy', item.attributes.slug)
     }
   },
   async created() {
-    await this.$store.dispatch('deviceTypeModule/index')
-    if(this.current_type === '') {
-      this.$store.dispatch('deviceModule/set_type', this.device_types[0].attributes.name)
-    }
-    this.$store.dispatch('deviceModule/index')
+    this.$store.dispatch('appModule/index')
   }
 }
 </script>

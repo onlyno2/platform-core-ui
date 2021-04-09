@@ -4,7 +4,6 @@
     class="c-header-nav-items"
     placement="bottom"
     add-menu-classes="pt-0"
-    v-if="current_project"
   >
     <template #toggler>
       <CHeaderNavLink>
@@ -25,7 +24,6 @@ import { AuthService } from '../../services/auth.service'
 import { mapState } from 'vuex'
 
 export default {
-  name: 'Project',
   data () {
     return { 
     }
@@ -51,7 +49,7 @@ export default {
       this.$store.dispatch('projectModule/set_current', project)
     }
   },
-  async beforeMount() {
+  async created() {
     await this.$store.dispatch('projectModule/index')
     if(localStorage.getItem('cprj') === 'undefined') {
       this.$store.dispatch('projectModule/set_current', this.projects[0])

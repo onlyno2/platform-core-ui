@@ -64,7 +64,6 @@
 import vueJsonEditor from 'vue-json-editor'
 
 export default {
-  name: 'ProjectCreate',
   data() {
     return {
       active_tab: 0,

@@ -6,7 +6,7 @@
           <CCardHeader>
             <CRow align-horizontal="end">
               <CCol>
-                <h3>Cập nhật thiết bị</h3>
+                <h3>Cập nhật ứng dụng</h3>
               </CCol>
             </CRow>
           </CCardHeader>
@@ -16,30 +16,11 @@
                 <CCard>
                   <CCardBody>
                     <CForm>
-                      <CInput label="Loại thiết bị" v-model="current_type" :disabled="true"/>
-                      <CInput label="Tên" v-model="device.attributes.name" :disabled="true"/>
+                      <CInput label="Tên" v-model="app.attributes.name" />
                       <CTextarea
                         label="Mô tả"
-                        v-model="device.attributes.description"
+                        v-model="app.attributes.description"
                       />
-                    </CForm>
-                  </CCardBody>
-                </CCard>
-              </CTab>
-              <CTab title="Metadata">
-                <CCard>
-                  <CCardBody>
-                    <CForm>
-                      <vue-json-editor mode="code" v-model="device.attributes.metadata"></vue-json-editor> 
-                    </CForm>
-                  </CCardBody>
-                </CCard>
-              </CTab>
-              <CTab title="Thông tin thiết bị">
-                <CCard>
-                  <CCardBody>
-                    <CForm>
-                      <vue-json-editor mode="code" v-model="device.attributes.device_info"></vue-json-editor> 
                     </CForm>
                   </CCardBody>
                 </CCard>
@@ -49,12 +30,12 @@
                   <CCardBody>
                     <CInput
                       label="Username"
-                      v-model="device.attributes.username"
+                      v-model="app.attributes.username"
                       :disabled="true"
                     />
                     <CInput
                       label="Clientid"
-                      v-model="device.attributes.client_id"
+                      v-model="app.attributes.client_id"
                       :disabled="true"
                     />
                   </CCardBody>
@@ -81,13 +62,9 @@
 </template>
 
 <script>
-import vueJsonEditor from 'vue-json-editor'
 import { mapState } from 'vuex'
 
 export default {
-  components: {
-    vueJsonEditor
-  },
   data() {
     return {
       active_tab: 0
@@ -95,21 +72,16 @@ export default {
   },
   computed: {
     ...mapState({
-      device: state => state.deviceModule.setting_object,
-      current_type: state => state.deviceModule.current_type
+      app: state => state.appModule.setting_object,
     })
   },
   methods: {
     update() {
-      this.$store.dispatch('deviceModule/update', this.$route.params.id)
+      this.$store.dispatch('appModule/update', this.$route.params.id)
     }
   },
   async beforeMount() {
-    if(this.current_type === '') {
-      this.$router.push('/devices')
-    } else {
-      await this.$store.dispatch('deviceModule/show', this.$route.params.id)
-    }
+    await this.$store.dispatch('appModule/show', this.$route.params.id)
   }
 }
 </script>

@@ -56,7 +56,6 @@ const actions = {
       Vue.$toast.success('Tạo mới thành công')
       dispatch('index', state.pagination.current_page)
       commit('SET_CREATED_OBJECT', response.data.data)
-      console.log('test inside create store', state.created_object, response.data.data)
       router.push('/devices/after_create')
     }
   },
@@ -76,6 +75,7 @@ const actions = {
     if(response.status === 200) {
       Vue.$toast.success('Cập nhật thành công')
       commit('UPDATE_CURRENT_SETTING_OBJECT', response.data.data)
+      router.push(`/devices/${id}/show`)
     }
   },
   states: async({ commit, state }, id) => {

@@ -39,7 +39,6 @@
 import { mapState } from 'vuex'
 
 export default {
-  name: 'ProjectShow',
   components: {
   },
   data() {

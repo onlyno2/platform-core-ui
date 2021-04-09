@@ -64,7 +64,6 @@ import 'vue-json-pretty/lib/styles.css';
 import { mapState } from 'vuex'
 
 export default {
-  name: 'ProjectShow',
   components: {
     VueJsonPretty
   },
@@ -83,8 +82,8 @@ export default {
       this.$router.push(`/device_types/${this.device_type.attributes.name}/edit`)
     }
   },
-  beforeMount() {
-    this.$store.dispatch('deviceTypeModule/show', this.$route.params.id)
+  async created() {
+    await this.$store.dispatch('deviceTypeModule/show', this.$route.params.id)
   }
 }
 </script>

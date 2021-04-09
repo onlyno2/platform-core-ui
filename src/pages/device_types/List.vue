@@ -66,7 +66,6 @@
 import { mapState } from 'vuex'
 
 export default {
-  name: 'DeviceTypeList',
   components: {
   },
   data () {
@@ -111,7 +110,7 @@ export default {
       this.$store.dispatch('deviceTypeModule/destroy', item)
     }
   },
-  async beforeMount() {
+  async created() {
     await this.$store.dispatch('deviceTypeModule/index')
   }
 }
