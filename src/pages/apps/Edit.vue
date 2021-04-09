@@ -62,13 +62,9 @@
 </template>
 
 <script>
-import vueJsonEditor from 'vue-json-editor'
 import { mapState } from 'vuex'
 
 export default {
-  components: {
-    vueJsonEditor
-  },
   data() {
     return {
       active_tab: 0

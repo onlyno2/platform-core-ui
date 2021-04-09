@@ -60,14 +60,10 @@
 </template>
 
 <script>
-import VueJsonPretty from 'vue-json-pretty';
 import 'vue-json-pretty/lib/styles.css';
 import { mapState } from 'vuex'
 
 export default {
-  components: {
-    VueJsonPretty
-  },
   data() {
     return {
       active_tab: 0

@@ -52,10 +52,7 @@
 </template>
 
 <script>
-import vueJsonEditor from "vue-json-editor";
-
 export default {
-  name: "ProjectCreate",
   data() {
     return {
       active_tab: 0,
@@ -67,9 +64,6 @@ export default {
         },
       },
     };
-  },
-  components: {
-    vueJsonEditor,
   },
   computed: {
   },
