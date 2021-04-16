@@ -90,14 +90,6 @@ const actions = {
       Vue.$toast.success('Xóa thành công')
       dispatch('index', state.pagination.current_page)
     }
-  },
-  actions: async({ commit, state }, id) => {
-    const current_project = JSON.parse(localStorage.getItem('cprj'))
-    const project_id = current_project.attributes.slug
-    const response = await RuleService.actions(project_id, state.current_type, id)
-    if(response.status === 200) {
-      console.log(response.data.data)
-    }    
   }
 }
 

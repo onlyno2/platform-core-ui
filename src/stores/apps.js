@@ -58,7 +58,7 @@ const actions = {
       router.push(`/apps/${id}/show`)
     }
   },
-  create: async({ commit, state }, data) => {
+  create: async({ commit }, data) => {
     let current_project = JSON.parse(localStorage.getItem('cprj'))
     const response = await AppService.create(current_project.attributes.slug, data)
     if(response.status === 201) {

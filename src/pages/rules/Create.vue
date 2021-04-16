@@ -57,7 +57,6 @@
 </template>
 
 <script>
-import vueJsonEditor from "vue-json-editor";
 import { mapState } from "vuex";
 
 export default {
@@ -74,9 +73,7 @@ export default {
       },
     };
   },
-  components: {
-    vueJsonEditor,
-  },
+  components: { },
   computed: {
     ...mapState({
       current_type: (state) => state.ruleModule.current_type,

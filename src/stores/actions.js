@@ -1,6 +1,5 @@
 import { ActionService } from '../services/action.service'
 import Vue from 'vue'
-import router from '../router/index'
 
 const state = {
   actions: []
