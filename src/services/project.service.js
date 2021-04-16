@@ -17,7 +17,6 @@ export class ProjectService {
   }
 
   static async create(data) {
-    console.log(data)
     const response = await api_v1.post('/projects', data)
     if (response.status === 200) {
       Vue.$toast.success('Create success')

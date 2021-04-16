@@ -4,6 +4,7 @@
     class="c-header-nav-items"
     placement="bottom"
     add-menu-classes="pt-0"
+    v-if="data_loaded"
   >
     <template #toggler>
       <CHeaderNavLink>
@@ -47,6 +48,9 @@ export default {
     },
     set_current(project) {
       this.$store.dispatch('projectModule/set_current', project)
+    },
+    data_loaded() {
+      return JSON.stringify(this.projects) === JSON.stringify({})
     }
   },
   async created() {

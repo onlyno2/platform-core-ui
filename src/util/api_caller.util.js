@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Router from '../router/index'
 import axios from 'axios'
 import { BASE_URL, API_V1_URL } from '../.env'
+import router from '../router/index'
 
 var auth = axios.create({
   baseURL: BASE_URL,
@@ -48,11 +49,14 @@ api_v1.interceptors.response.use(function (response) {
       Router.push('/login')
       break
   
-    case 404: case 400: case 422:
+    case 404:
+      router.push('/pages/404')
+      break
+    case 400: case 422:
       error_message = error.response.data.status
       break
-
     case 500:
+      router.push('/pages/500')
       break
   }
   if (error_message !== '')

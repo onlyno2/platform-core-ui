@@ -34,7 +34,6 @@ const actions = {
     let current_project = JSON.parse(localStorage.getItem('cprj'))
     const response = await AppService.index(current_project.attributes.slug, page)
     if(response.status === 200) {
-      console.log(response.data)
       commit('UPDATE_APP_LIST', response.data.data)
       commit('UPDATE_PAGINATE_INFO', response.data.paginate)
     }
@@ -59,13 +58,12 @@ const actions = {
       router.push(`/apps/${id}/show`)
     }
   },
-  create: async({ commit, state }, data) => {
+  create: async({ commit }, data) => {
     let current_project = JSON.parse(localStorage.getItem('cprj'))
     const response = await AppService.create(current_project.attributes.slug, data)
     if(response.status === 201) {
       Vue.$toast.success('Tạo mới thành công')
       commit('SET_CREATED_OBJECT', response.data.data)
-      console.log(state.created_object)
       router.push('/apps/after_create')
     }
   },
