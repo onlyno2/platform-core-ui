@@ -6,17 +6,7 @@
           <CCardHeader>
             <CRow align-horizontal="end">
               <CCol>
-                <h3>Chi tiết thiết bị</h3>
-              </CCol>
-              <CCol style="text-align: end">
-                <CButton
-                  color="info"
-                  variant="outline"
-                  square
-                  @click="edit"
-                >
-                  Cập nhật
-                </CButton>
+                <h3>Tạo mới thiết bị</h3>
               </CCol>
             </CRow>
           </CCardHeader>
@@ -26,7 +16,13 @@
                 <CCard>
                   <CCardBody>
                     <CForm>
-                      <CInput label="Tên" v-model="current_type" :disabled="true"/>
+                      <CSelect
+                        label="Loại thiết bị"
+                        :options="type_options"
+                        :value="current_type"
+                        :disabled="true"
+                      >
+                      </CSelect>
                       <CInput label="Tên" v-model="device.attributes.name" :disabled="true"/>
                       <CTextarea
                         label="Mô tả"
@@ -41,7 +37,7 @@
                 <CCard>
                   <CCardBody>
                     <CForm>
-                      <vue-json-pretty :data="device.attributes.metadata" :showLenght="true" > </vue-json-pretty>
+                      <vue-json-pretty :data="device.attributes.device_info" :showLenght="true" > </vue-json-pretty>
                     </CForm>
                   </CCardBody>
                 </CCard>
@@ -68,14 +64,15 @@
                       v-model="device.attributes.client_id"
                       :disabled="true"
                     />
-                  </CCardBody>
-                </CCard>
-              </CTab>
-              <CTab title="Trạng thái (state)">
-                <CCard>
-                  <CCardBody>
-                    <CSelect :options="state_options" v-model="state_id" @update:value="state_selected"></CSelect>
-                    <vue-json-pretty :data="state_data" :showLenght="true" > </vue-json-pretty>
+                    <CInput
+                      label="Mật khẩu"
+                      v-model="device.attributes.secret_token"
+                      :disabled="true"
+                    />
+                    <CBadge color="danger">
+                      Lưu ý: Mật khẩu này nên được lưu lại ở một nơi khác. 
+                      Sẽ không thể khôi phục hoặc thay đổi sau khi tạo thiết bị
+                    </CBadge>
                   </CCardBody>
                 </CCard>
               </CTab>
@@ -93,48 +90,33 @@ import 'vue-json-pretty/lib/styles.css';
 import { mapState } from 'vuex'
 
 export default {
-  name: 'ProjectShow',
   components: {
     VueJsonPretty
   },
   data() {
     return {
-      active_tab: 0,
-      state_data: {},
-      state_id: ''
+      active_tab: 0
     }
   },
   computed: {
     ...mapState({
-      device: state => state.deviceModule.setting_object,
-      current_type: state => state.deviceModule.current_type,
-      state_options: (state) => {
-        return state.deviceModule.device_states.map(function(state) {
+      type_options: (state) => {
+        return state.deviceTypeModule.device_types.map(function (device_type) {
           return {
-            value: state.state_id,
-            label: state.state_id
-          }
-        })
+            value: device_type.attributes.name,
+            label: device_type.attributes.name,
+          };
+        });
       },
-      states: state => state.deviceModule.device_states
+      device: state => state.deviceModule.created_object,
+      current_type: state => state.deviceModule.current_type
     })
   },
   methods: {
-    edit() {
-      this.$router.push(`/devices/${this.device.attributes.name}/edit`)
-    },
-    state_selected(value) {
-      this.state_id = value
-    }
   },
-  async beforeMount() {
-    if(this.current_type === '') {
+  beforeMount() {
+    if(JSON.stringify(this.device) === JSON.stringify({})) {
       this.$router.push('/devices')
-    } else {
-      await this.$store.dispatch('deviceModule/show', this.$route.params.id)
-      await this.$store.dispatch('deviceModule/states', this.$route.params.id)
-      this.state_id = this.state_options[0].value
-      this.state_data = this.states.find(state => state.state_id === this.state_id).state
     }
   }
 }

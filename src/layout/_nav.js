@@ -28,6 +28,12 @@ export default [
       },
       {
         _name: 'CSidebarNavItem',
+        name: 'Luật',
+        to: '/rules',
+        icon: 'cil-list-numbered'
+      },
+      {
+        _name: 'CSidebarNavItem',
         name: 'Dashboard',
         to: '/dashboard',
         icon: 'cil-speedometer',
