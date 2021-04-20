@@ -10,6 +10,12 @@ export default [
       },
       {
         _name: 'CSidebarNavItem',
+        name: 'Schema',
+        to: '/schemas',
+        icon: 'cil-file'
+      },
+      {
+        _name: 'CSidebarNavItem',
         name: 'Loại thiết bị',
         to: '/device_types',
         icon: 'cil-memory'
@@ -31,6 +37,12 @@ export default [
         name: 'Luật',
         to: '/rules',
         icon: 'cil-list-numbered'
+      },
+      {
+        _name: 'CSidebarNavItem',
+        name: 'Trạng thái thiết bị',
+        to: '/mappings',
+        icon: 'cil-swap-horizontal'
       },
       {
         _name: 'CSidebarNavItem',

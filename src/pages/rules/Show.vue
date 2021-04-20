@@ -198,7 +198,6 @@ export default {
       this.$router.push('/rules')
     } else {
       await this.$store.dispatch('ruleModule/show', this.$route.params.id)
-      console.log(this.current_type)
       await this.$store.dispatch('actionModule/index', { type_id: this.current_type, rule_id: this.$route.params.id })
     }
   }

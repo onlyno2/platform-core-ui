@@ -63,6 +63,8 @@ import DeviceTypeRoutes from './DeviceTypeRoutes'
 import DeviceRoutes from './DeviceRoutes'
 import AppRoutes from './AppRoutes'
 import RuleRoutes from './RuleRoutes'
+import StateMappingRoutes from './StateMappingRotues'
+import SchemaRoutes from './SchemaRoutes'
 
 Vue.use(Router)
 
@@ -87,6 +89,8 @@ function configRoutes () {
         ...DeviceRoutes,
         ...AppRoutes,
         ...RuleRoutes,
+        ...StateMappingRoutes,
+        ...SchemaRoutes,
         {
           path: 'dashboard',
           name: 'Dashboard',

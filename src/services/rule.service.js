@@ -17,7 +17,6 @@ export class RuleService {
 
   static async update(project_id, type_id, rule_id, data) {
     const response = await api_v1.patch(`/projects/${project_id}/device_types/${type_id}/rules/${rule_id}`, data)
-    console.log(response)
     if(response.status === 200) {
       return response
     }
