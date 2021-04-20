@@ -242,13 +242,7 @@ export default {
           key: 'action',
           label: ''
         }
-      ],
-      mapping: {
-        attributes: {
-          state_id: "",
-          mappings: ""
-        },
-      },
+      ]
     };
   },
   components: {
