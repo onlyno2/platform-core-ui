@@ -10,7 +10,6 @@ import 'vue-toast-notification/dist/theme-sugar.css';
 import { iconsSet as icons } from './assets/icons/icons.js'
 import store from './store'
 
-Vue.config.performance = true
 Vue.use(CoreuiVue)
 Vue.prototype.$log = console.log.bind(console)
 Vue.use(VueToast, {

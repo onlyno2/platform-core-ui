@@ -52,8 +52,12 @@ api_v1.interceptors.response.use(function (response) {
     case 404:
       router.push('/pages/404')
       break
-    case 400: case 422:
+    case 400:
       error_message = error.response.data.status
+      break
+
+    case 422:
+      error_message = 'Có lỗi xảy ra'
       break
     case 500:
       router.push('/pages/500')
