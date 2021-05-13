@@ -7,8 +7,8 @@
             <CCard class="p-4">
               <CCardBody>
                 <CForm>
-                  <h1>Login</h1>
-                  <p class="text-muted">Sign In to your account</p>
+                  <h1>Đăng nhập</h1>
+                  <p class="text-muted">Đăng nhập vào tài khoản của bạn</p>
                   <CInput
                     placeholder="Email"
                     autocomplete="Email"
@@ -17,7 +17,7 @@
                     <template #prepend-content><CIcon name="cil-user"/></template>
                   </CInput>
                   <CInput
-                    placeholder="Password"
+                    placeholder="Mật khẩu"
                     type="password"
                     autocomplete="curent-password"
                     v-model="user.password"
@@ -26,11 +26,11 @@
                   </CInput>
                   <CRow>
                     <CCol col="6" class="text-left">
-                      <CButton color="primary" class="px-4" @click="login">Login</CButton>
+                      <CButton color="primary" class="px-4" @click="login">Đăng nhập</CButton>
                     </CCol>
                     <CCol col="6" class="text-right">
-                      <CButton color="link" class="px-0">Forgot password?</CButton>
-                      <CButton color="link" class="d-lg-none">Register now!</CButton>
+                      <CButton color="link" class="px-0">Quên mật khẩu?</CButton>
+                      <CButton color="link" class="d-lg-none">Đăng ký ngay</CButton>
                     </CCol>
                   </CRow>
                 </CForm>
@@ -43,14 +43,15 @@
               body-wrapper
             >
               <CCardBody>
-                <h2>Sign up</h2>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                <h2>Đăng ký</h2>
+                <p>Chưa có tài khoản ?</p>
                 <CButton
                   color="light"
                   variant="outline"
                   size="lg"
+                  @click="register"
                 >
-                  Register Now!
+                  Đăng ký ngay
                 </CButton>
               </CCardBody>
             </CCard>
@@ -76,6 +77,9 @@ export default {
   methods: {
     login() {
       AuthService.login(this.user)
+    },
+    register() {
+      this.$router.push('/register')
     }
   }
 }

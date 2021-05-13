@@ -17,6 +17,9 @@ const mutations = {
   UPDATE_MAPPING_LIST: (state, mappings) => {
     state.mappings = mappings;
   },
+  UPDATE_PAGINATE_INFO: (state, paginate) => {
+    state.pagination = paginate
+  },
   SET_CURRENT_EVENT: (state, event) => {
     state.current_event = event
   },
@@ -47,6 +50,7 @@ const actions = {
     const response = await MappingService.index(project_id, state.current_type, state.current_event, page)
     if(response.status === 200) {
       commit('UPDATE_MAPPING_LIST', response.data.data)
+      commit('UPDATE_PAGINATE_INFO', response.data.paginate)
     }
   },
   create: async({ dispatch, state }, data) => {

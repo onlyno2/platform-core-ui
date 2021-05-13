@@ -8,7 +8,7 @@
   >
     <template #toggler>
       <CHeaderNavLink>
-        Project: {{ current_project.attributes.slug }}
+        {{ current_project && current_project.attributes && current_project.attributes.slug ? current_project.attributes.slug : 'Chưa có dự án' }}
       </CHeaderNavLink>
     </template>
     <div v-for="(item, index) in projects" v-bind:key="index">
@@ -23,6 +23,7 @@
 <script>
 import { AuthService } from '../../services/auth.service'
 import { mapState } from 'vuex'
+import { isEqual } from 'lodash'
 
 export default {
   data () {
@@ -36,12 +37,6 @@ export default {
       current_project: state => state.projectModule.current_project
     })
   },
-  watch: {
-    'paginate.current_page': function(newPage) {
-      if (newPage <= this.paginate.pages)
-        this.$store.dispatch('projectModule/index', newPage)
-    }
-  },
   methods: {
     logout() {
       AuthService.logout()
@@ -54,8 +49,12 @@ export default {
     }
   },
   async created() {
+    console.log(this.paginate)
     await this.$store.dispatch('projectModule/index')
     if(localStorage.getItem('cprj') === 'undefined') {
+      if(isEqual(this.projects, [])) {
+        return
+      }
       this.$store.dispatch('projectModule/set_current', this.projects[0])
     } else {
       let current_project = JSON.parse(localStorage.getItem('cprj'))

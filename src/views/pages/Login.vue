@@ -7,16 +7,16 @@
             <CCard class="p-4">
               <CCardBody>
                 <CForm>
-                  <h1>Login</h1>
-                  <p class="text-muted">Sign In to your account</p>
+                  <h1>Đăng nhập</h1>
+                  <p class="text-muted">Đăng nhập vào tài khoản của bạn</p>
                   <CInput
-                    placeholder="Username"
+                    placeholder="Email"
                     autocomplete="username email"
                   >
                     <template #prepend-content><CIcon name="cil-user"/></template>
                   </CInput>
                   <CInput
-                    placeholder="Password"
+                    placeholder="Mật khẩu"
                     type="password"
                     autocomplete="curent-password"
                   >

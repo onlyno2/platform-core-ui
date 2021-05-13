@@ -1,3 +1,4 @@
+import Vue from 'vue'
 import router from '../router/index'
 import { auth, api_v1 } from '../util/api_caller.util'
 
@@ -10,6 +11,14 @@ export class AuthService {
       auth.defaults.headers.Authorization = auth_token
       api_v1.defaults.headers.Authorization = auth_token
       router.push('/dashboard')
+    }
+  }
+
+  static async signup(user) {
+    const response = await auth.post('/signup', { user: user })
+    if(response.status === 201) {
+      Vue.$toast.success('Đăng ký thành công')
+      router.push('/login')
     }
   }
 
