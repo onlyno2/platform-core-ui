@@ -1,4 +1,5 @@
 import { ProjectService } from '../services/project.service'
+import router from '../router/index'
 
 const state = {
   projects: [],
@@ -49,6 +50,7 @@ const actions = {
     const response = await ProjectService.create(data)
     if (response.status === 201) {
       dispatch('index', state.pagination.current_page)
+      router.push('/projects')
     }
   },
   delete: async({ dispatch, state }, project) => {

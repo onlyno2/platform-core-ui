@@ -14,7 +14,7 @@
               md
               @click="create(item)"
             >
-              <CIcon class="create-btn-icon" name="cil-plus" /> Create
+              <CIcon class="create-btn-icon" name="cil-plus" /> Tạo mới
             </CButton>
           </CCol>
         </CRow>
@@ -88,11 +88,8 @@ export default {
     return {
       fields: [
         {
-          key: 'id'
-        },
-        {
           key: 'name',
-          label: 'Tên'
+          label: 'ID'
         },
         {
           key: 'description',

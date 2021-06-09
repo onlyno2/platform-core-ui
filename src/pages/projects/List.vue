@@ -72,7 +72,8 @@ export default {
     return {
       fields: [
         {
-          key: 'id'
+          key: 'id',
+          label: 'Tên'
         },
         {
           key: 'description',

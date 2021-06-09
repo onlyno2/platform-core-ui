@@ -6,7 +6,7 @@
           <CCardHeader>
             <CRow align-horizontal="end">
               <CCol>
-                <h3>Tạo mới thiết bị</h3>
+                <h3>Tạo mới ứng dụng</h3>
               </CCol>
             </CRow>
           </CCardHeader>

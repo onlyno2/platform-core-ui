@@ -19,7 +19,7 @@ export class ProjectService {
   static async create(data) {
     const response = await api_v1.post('/projects', data)
     if (response.status === 200) {
-      Vue.$toast.success('Create success')
+      Vue.$toast.success('Tạo mới dự án thành công')
       return response
     }
   }
@@ -27,7 +27,7 @@ export class ProjectService {
   static async update(id, data) {
     const response = await api_v1.patch(`/projects/${id}`, data)
     if (response.status === 200) {
-      Vue.$toast.success('Update success')
+      Vue.$toast.success('Cập nhật thông tin dự án thành công')
       return response
     }
   }
@@ -35,7 +35,7 @@ export class ProjectService {
   static async delete(id) {
     const response = await api_v1.delete(`/projects/${id}`)
     if (response.status === 200) {
-      Vue.$toast.success('Delete success')
+      Vue.$toast.success('Xóa dự án thành công')
       return response
     }
   }

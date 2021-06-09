@@ -4,7 +4,8 @@ import Router from 'vue-router'
 // Containers
 const Layout = () => import('@/layout/Layout')
 const Dashboard = () => import('@/views/Dashboard')
-
+const Page500 = () => import('@/views/pages/Page500')
+const Page404 = () => import('@/views/pages/Page404')
 
 import AuthRoutes from './AuthRoutes'
 import ProjectRoutes from './ProjectRoutes'
@@ -46,6 +47,16 @@ function configRoutes () {
         ...StateMappingRoutes,
         ...SchemaRoutes,
       ]
+    },
+    {
+      path: '/pages/500',
+      name: 'InternalError',
+      component: Page500
+    },
+    {
+      path: '/pages/404',
+      name: 'NotFound',
+      component: Page404
     }
   ]
 }

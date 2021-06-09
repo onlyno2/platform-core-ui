@@ -18,6 +18,7 @@
                     <CForm>
                       <CInput label="Loại thiết bị" v-model="current_type" :disabled="true"/>
                       <CInput label="Tên" v-model="rule.attributes.name"/>
+                      <CTextarea label="Điều kiện" v-model="rule.attributes.condition"/>
                       <CTextarea
                         label="Mô tả"
                         v-model="rule.attributes.description"

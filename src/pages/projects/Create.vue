@@ -12,7 +12,7 @@
           </CCardHeader>
           <CCardBody>
             <CForm>
-              <CInput label="Tên" v-model="project.name" />
+              <CInput label="Tên" v-model="project.name" :is-valid="project_name_validator" invalid-feedback="Tên dự án không được bỏ trống. Tên dự án chỉ được bao gồm các ký tự A-Z a-z 0-9 - _"/>
               <CTextarea
                 label="Mô tả"
                 v-model="project.description"
@@ -54,6 +54,9 @@ export default {
   methods: {
     create() {
       this.$store.dispatch('projectModule/create', this.project)
+    },
+    project_name_validator() {
+      return this.project.name !== '' && this.project.name.match(/\A[a-zA-Z][\d\w\_\-]+\z/)
     }
   }
 };

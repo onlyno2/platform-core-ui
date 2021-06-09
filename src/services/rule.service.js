@@ -30,6 +30,7 @@ export class RuleService {
   }
 
   static async destroy(project_id, type_id, rule_id) {
+    console.log(`/projects/${project_id}/device_types/${type_id}/rules/${rule_id}`)
     const response = await api_v1.delete(`/projects/${project_id}/device_types/${type_id}/rules/${rule_id}`)
     if(response.status === 200) {
       return response

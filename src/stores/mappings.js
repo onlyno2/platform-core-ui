@@ -59,7 +59,7 @@ const actions = {
     const response = await MappingService.create(project_id, state.current_type, state.current_event, data)
     if(response.status === 201) {
       Vue.$toast.success('Tạo mới thành công')
-      dispatch('index', state.current_type, state.current_event)
+      dispatch('index', state.pagination.current_page)
     }
   },
   show: async({ commit }, id) => {

@@ -32,17 +32,17 @@
             </td>
           </template>
            <template #event_id="{item}">
-            <td>
+            <td @click="show(item)">
               {{ item.attributes.event_id }}
             </td>
           </template>
           <template #description="{item}">
-            <td>
+            <td @click="show(item)">
               {{ item.attributes.description }}
             </td>
           </template>
           <template #condition="{item}">
-            <td>
+            <td @click="show(item)">
               {{ item.attributes.condition }}
             </td>
           </template>
@@ -140,10 +140,10 @@ export default {
       this.$router.push(`rules/create`)
     },
     update(item) {
-      this.$router.push(`rules/${item.attributes.id}/edit`)
+      this.$router.push(`rules/${item.id}/edit`)
     },
     destroy(item) {
-      this.$store.dispatch('ruleModule/destroy', item.attributes.name)
+      this.$store.dispatch('ruleModule/destroy', item.id)
     },
     type_selected(value) {
       this.$store.dispatch('ruleModule/set_type', value)
